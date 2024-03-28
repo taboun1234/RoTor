@@ -122,6 +122,8 @@ BLEWordCharacteristic CapteurA5Caracteristique ("7bfaa208-63c7-4d86-a860-05b13af
 BLEWordCharacteristic CapteurBDCaracteristique ("7bfaa209-63c7-4d86-a860-05b13af7cffd", BLERead | BLEWriteWithoutResponse);  // Valeur capteur Bas droit
 BLEWordCharacteristic CapteurA6Caracteristique ("7bfaa210-63c7-4d86-a860-05b13af7cffd", BLERead | BLEWriteWithoutResponse);  // Valeur capteur Avant Tout à droite
 
+BLEBoolCharacteristic ArretCaracteristique ("7bfaa211-63c7-4d86-a860-05b13af7cffd", BLERead | BLEWriteWithoutResponse);  // Valeur lorsque le robot s'arrète a cause des capteurs
+
   // Bluetooth® Low Energy Capteurs Descriptors 
 BLEDescriptor CapteurA0Descriptor("2901", "Capteur A0");
 BLEDescriptor CapteurBGDescriptor("2901", "Capteur BG");
@@ -163,6 +165,8 @@ void Init_CapteursService(){
     CapteursService.addCharacteristic(CapteurA5Caracteristique);
     CapteursService.addCharacteristic(CapteurBDCaracteristique);
     CapteursService.addCharacteristic(CapteurA6Caracteristique);
+      
+    CapteursService.addCharacteristic(ArretCaracteristique);
 
     // add service
     BLE.addService(CapteursService);
@@ -179,4 +183,6 @@ void Init_CapteursService(){
     CapteurA5Caracteristique.writeValue(7);
     CapteurBDCaracteristique.writeValue(8);
     CapteurA6Caracteristique.writeValue(9);
+      
+    ArretCaracteristique.writeValue(0);
 }
