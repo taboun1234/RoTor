@@ -63,7 +63,7 @@ void setup() {
   BLE.setLocalName("RoTor"); 
   BLE.setDeviceName("RoTor");
   Init_PropulsionService();
-  //Init_CapteursService();
+  Init_CapteursService();
 
   // start advertising
   Serial.println("BLE LED Peripheral");
