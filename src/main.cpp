@@ -60,8 +60,8 @@ void setup() {
     while (1);
   }
   
-  BLE.setLocalName("ZGEG"); 
-  BLE.setDeviceName("BONSOIR");
+  BLE.setLocalName("RoTor"); 
+  BLE.setDeviceName("RoTor");
   Init_PropulsionService();
   //Init_CapteursService();
 
