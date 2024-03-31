@@ -20,7 +20,31 @@ public:
   BLETab10ValCharacteristic(const char* uuid, unsigned int permissions);
 };*/
 
+/**
+ * @brief Initialisation du service BLE pour le système de propulsion
+ * @author JOANNIS Naël
+ * @date 31-03-2024
+ * 
+ * Création du service PropulsionService avec instansiation et initialisation des caractéristiques pour les sens de rotation et la puissance des deux moteurs
+ * 
+ * @param aucun
+ * @return ne retourne rien
+ * 
+ * @version 1.0.0
+*/
 void Init_PropulsionService();
 
+/**
+ * @brief méthode appelée lorsqu'il y a un mur trop proche
+ * @author JOANNIS Naël
+ * @date 31-03-2024
+ * 
+ * Cette méthode est appelé à la suite d'une interruption de front montant sur la pin INT_MUR
+ * 
+ * @param aucun
+ * @return ne retourne rien
+ * 
+ * @version 1.0.0
+*/
 void Init_CapteursService();
 
