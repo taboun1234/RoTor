@@ -1,4 +1,5 @@
 #include <ArduinoBLE.h>
+#include "Nos_define.h"
 
 /*struct Tab10Val
 {

@@ -1,12 +1,5 @@
 #include "Mon_BLE.h"
 
-#define PUISS_GAUCHE 2  // Pin qui délivre le signal pwm qui control la vitesse du moteur Gauche
-#define PUISS_DROITE 3  // Pin qui délivre le signal pwm qui control la vitesse du moteur Droit
-#define SENS_AV_DROITE 11 // Pin qui indique met le sens du moteur droit à avancer
-#define SENS_AR_DROITE 12 // Pin qui indique met le sens du moteur droit à avancer
-#define SENS_AV_GAUCHE 9 // Pin qui indique met le sens du moteur gauche à avancer
-#define SENS_AR_GAUCHE 10 // Pin qui indique met le sens du moteur grauche à avancer
-
 
 
       // Service pour gérer deux moteurs
@@ -54,6 +47,7 @@ void Init_PropulsionService(){
     PuissanceDroiteCharacteristic.setEventHandler(BLEWritten, callbackPDroite);
     SensDroiteCharacteristic.setEventHandler(BLEWritten, callbackSDroite);
     SensGaucheCharacteristic.setEventHandler(BLEWritten, callbackSGauche);
+    
     digitalWrite(PUISS_GAUCHE,PuissanceGaucheCharacteristic.value());
     digitalWrite(PUISS_DROITE,PuissanceDroiteCharacteristic.value());
     digitalWrite(SENS_AR_DROITE,1);
@@ -61,21 +55,21 @@ void Init_PropulsionService(){
 }
 
 void callbackPGauche(BLEDevice central, BLECharacteristic characteristic){
-  /*Serial.print("Puissance gauche = ");
-  Serial.println(PuissanceGaucheCharacteristic.value());*/
+  Serial.print("Puissance gauche = ");
+  Serial.println(PuissanceGaucheCharacteristic.value());
   analogWrite(PUISS_GAUCHE,PuissanceGaucheCharacteristic.value());
 }
 
 void callbackPDroite(BLEDevice central, BLECharacteristic characteristic){
-  /*Serial.print("Puissance droite = ");
-  Serial.println(PuissanceDroiteCharacteristic.value());*/
+  Serial.print("Puissance droite = ");
+  Serial.println(PuissanceDroiteCharacteristic.value());
   analogWrite(PUISS_DROITE,PuissanceDroiteCharacteristic.value());
 }
 
 void callbackSDroite(BLEDevice central, BLECharacteristic characteristic){
 
-  /*Serial.print("Sens droite = ");
-  Serial.println(SensDroiteCharacteristic.value()==1);*/
+  Serial.print("Sens droite = ");
+  Serial.println(SensDroiteCharacteristic.value()==1);
    if (SensDroiteCharacteristic.value()){
       digitalWrite(SENS_AV_DROITE,HIGH);
       digitalWrite(SENS_AR_DROITE,LOW);
@@ -87,8 +81,8 @@ void callbackSDroite(BLEDevice central, BLECharacteristic characteristic){
 }
 
 void callbackSGauche(BLEDevice central, BLECharacteristic characteristic){
-  /*Serial.print("Sens gauche = ");
-  Serial.println(SensGaucheCharacteristic.value());*/
+  Serial.print("Sens gauche = ");
+  Serial.println(SensGaucheCharacteristic.value());
   if (SensGaucheCharacteristic.value()==1){
     digitalWrite(SENS_AV_GAUCHE,HIGH);
     digitalWrite(SENS_AR_GAUCHE,LOW);
@@ -121,8 +115,6 @@ BLEWordCharacteristic CapteurA4Caracteristique ("7bfaa207-63c7-4d86-a860-05b13af
 BLEWordCharacteristic CapteurA5Caracteristique ("7bfaa208-63c7-4d86-a860-05b13af7cffd", BLERead | BLEWriteWithoutResponse);  // Valeur capteur Avant milieu droit
 BLEWordCharacteristic CapteurBDCaracteristique ("7bfaa209-63c7-4d86-a860-05b13af7cffd", BLERead | BLEWriteWithoutResponse);  // Valeur capteur Bas droit
 BLEWordCharacteristic CapteurA6Caracteristique ("7bfaa210-63c7-4d86-a860-05b13af7cffd", BLERead | BLEWriteWithoutResponse);  // Valeur capteur Avant Tout à droite
-
-BLEBoolCharacteristic ArretCaracteristique ("7bfaa211-63c7-4d86-a860-05b13af7cffd", BLERead | BLEWriteWithoutResponse);  // Valeur lorsque le robot s'arrète a cause des capteurs
 
   // Bluetooth® Low Energy Capteurs Descriptors 
 BLEDescriptor CapteurA0Descriptor("2901", "Capteur A0");
@@ -165,8 +157,6 @@ void Init_CapteursService(){
     CapteursService.addCharacteristic(CapteurA5Caracteristique);
     CapteursService.addCharacteristic(CapteurBDCaracteristique);
     CapteursService.addCharacteristic(CapteurA6Caracteristique);
-      
-    CapteursService.addCharacteristic(ArretCaracteristique);
 
     // add service
     BLE.addService(CapteursService);
@@ -183,6 +173,4 @@ void Init_CapteursService(){
     CapteurA5Caracteristique.writeValue(7);
     CapteurBDCaracteristique.writeValue(8);
     CapteurA6Caracteristique.writeValue(9);
-      
-    ArretCaracteristique.writeValue(0);
 }
