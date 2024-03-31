@@ -2,28 +2,7 @@
 #include "Nos_methodes.h"
 
 
-  // Roues 
-#define PUISS_GAUCHE 2  // Pin qui délivre le signal pwm qui control la vitesse du moteur Gauche
-#define PUISS_DROITE 3  // Pin qui délivre le signal pwm qui control la vitesse du moteur Droit
-#define SENS_AV_DROITE 11 // Pin qui indique met le sens du moteur droit à avancer
-#define SENS_AR_DROITE 12 // Pin qui indique met le sens du moteur droit à avancer
-#define SENS_AV_GAUCHE 13 // Pin qui indique met le sens du moteur gauche à avancer
-#define SENS_AR_GAUCHE 14 // Pin qui indique met le sens du moteur grauche à avancer
-#define INT1_CAPTEUR_MD  // Pin qui reçoit le carré 1 du capteur moteur droit
-#define INT2_CAPTEUR_MD  // Pin qui reçoit le carré 2 du capteur moteur droit
-#define INT1_CAPTEUR_MG  // Pin qui reçoit le carré 1 du capteur moteur gauche
-#define INT2_CAPTEUR_MG  // Pin qui reçoit le carré 2 du capteur moteur gauche
-
-  // Capteurs
-#define TTL           // Pin qui génère le signal carré de période 2ms (rapport cyclique 50%)
-#define RESET_COMPT   // Pin qui perpmet le reset du compteur
-#define INT_MUR 0      // Pin qui récupère l'interuption de détection de mur
-#define INT_SOL 1      // Pin  qui récupère l'interuption de non détection de sol
-#define MES_DIST      // Pin qui récupère la distance mesuré par les capteurs(val entre 0(>10cm?) et 5V("0cm"))
-#define LAME_AV       // Pin qui récupère l'état du capteurs lame souple avant
-#define LAME_ROUES    // Pin qui récupère l'état du capteurs lame souple roues
-
-#define BTN 0
+  
 
 const int ledPin = LED_BUILTIN; // pin to use for the LED
 
@@ -35,22 +14,9 @@ void setup() {
   // set LED pin to output mode
   pinMode(ledPin, OUTPUT);
 
-  pinMode(PUISS_GAUCHE, OUTPUT);
-  pinMode(PUISS_DROITE, OUTPUT);
-  pinMode(SENS_AR_DROITE, OUTPUT);
-  pinMode(SENS_AV_DROITE, OUTPUT);
-  /*pinMode(INT1_CAPTEUR_MD, INPUT);
-  pinMode(INT2_CAPTEUR_MD, INPUT);
-  pinMode(INT1_CAPTEUR_MG, INPUT);
-  pinMode(INT2_CAPTEUR_MG, INPUT);
+  Init_Propulsion();
 
-  pinMode(TTL, OUTPUT);
-  pinMode(RESET_COMPT, OUTPUT);
-  pinMode(INT_MUR, INPUT);
-  pinMode(INT_SOL, INPUT);
-  pinMode(MES_DIST, INPUT);
-  pinMode(LAME_AV, INPUT);
-  pinMode(LAME_ROUES, INPUT);*/
+  
   //PORT->Group[g_APinDescription[a].ulPort].DIRSET.reg = (uint32_t)(1<<g_APinDescription[a].ulPin);
 
 
@@ -60,10 +26,11 @@ void setup() {
     while (1);
   }
   
-  BLE.setLocalName("RoTor"); 
-  BLE.setDeviceName("RoTor");
+  BLE.setLocalName("ZGEG"); 
+  BLE.setDeviceName("BONSOIR");
   Init_PropulsionService();
-  Init_CapteursService();
+  //Init_CapteursService();
+
 
   // start advertising
   Serial.println("BLE LED Peripheral");
