@@ -17,16 +17,13 @@ void callbackPDroite(BLEDevice central, BLECharacteristic characteristic);
 void callbackSGauche(BLEDevice central, BLECharacteristic characteristic);
 void callbackSDroite(BLEDevice central, BLECharacteristic characteristic);
 
-  //BLEDescriptor batteryLevelDescriptor("2902", "millis en bonsoir");
-BLEDescriptor batteryLevelDescriptor2("2901", "millis en bonsoir sboub blubs");
+
 
 void Init_PropulsionService(){
     
     // set advertised local name and service UUID:
     BLE.setAdvertisedService(PropulsionService);
 
-    //switchCharacteristic.addDescriptor(batteryLevelDescriptor);
-    PuissanceGaucheCharacteristic.addDescriptor(batteryLevelDescriptor2);
 
     // add the characteristic to the service
     PropulsionService.addCharacteristic(PuissanceGaucheCharacteristic);
