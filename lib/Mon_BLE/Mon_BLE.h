@@ -1,7 +1,7 @@
 #include <ArduinoBLE.h>
 #include "Nos_define.h"
 
-/*struct Tab10Val
+/*struct Tab10Val        // Essai pour faire une seul caractéristque avec toutes les valeurs de nos capteurs mais non abouti
 {
     uint16_t capteurA0;
     uint16_t capteurBG;
